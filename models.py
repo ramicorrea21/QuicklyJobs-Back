@@ -7,7 +7,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_handle = db.Column(db.String(50), nullable=False, unique=True)
     user_email = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(250), nullable=False)
     profile = db.relationship('Profile', backref='Users')
     services = db.relationship('Services', backref='Users')
     requests = db.relationship('Requests', backref='Users')
