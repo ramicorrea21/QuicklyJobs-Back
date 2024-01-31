@@ -1,0 +1,52 @@
+[
+    {
+        "user_handle": "user0",
+        "user_email": "user0@example.com",
+        "password": "password0"
+    },
+    {
+        "user_handle": "user1",
+        "user_email": "user1@example.com",
+        "password": "password1"
+    },
+    {
+        "user_handle": "user2",
+        "user_email": "user2@example.com",
+        "password": "password2"
+    },
+    {
+        "user_handle": "user3",
+        "user_email": "user3@example.com",
+        "password": "password3"
+    },
+    {
+        "user_handle": "user4",
+        "user_email": "user4@example.com",
+        "password": "password4"
+    },
+    {
+        "user_handle": "user5",
+        "user_email": "user5@example.com",
+        "password": "password5"
+    },
+    {
+        "user_handle": "user6",
+        "user_email": "user6@example.com",
+        "password": "password6"
+    },
+    {
+        "user_handle": "user7",
+        "user_email": "user7@example.com",
+        "password": "password7"
+    },
+    {
+        "user_handle": "user8",
+        "user_email": "user8@example.com",
+        "password": "password8"
+    },
+    {
+        "user_handle": "user9",
+        "user_email": "user9@example.com",
+        "password": "password9"
+    }
+]

@@ -1,0 +1,112 @@
+[
+    {
+        "user_id": 1,
+        "first_name": "John",
+        "last_name": "Doe",
+        "description": "Web Developer",
+        "phone": "1234567890",
+        "location": "City1",
+        "address": "123 Main St",
+        "profession": "Software Engineer",
+        "category": "IT"
+    },
+    {
+        "user_id": 2,
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "description": "Graphic Designer",
+        "phone": "9876543210",
+        "location": "City2",
+        "address": "456 Oak St",
+        "profession": "Designer",
+        "category": "Design"
+    },
+    {
+        "user_id": 3,
+        "first_name": "Mike",
+        "last_name": "Johnson",
+        "description": "Accountant",
+        "phone": "5556667777",
+        "location": "City3",
+        "address": "789 Pine St",
+        "profession": "Accountant",
+        "category": "Finance"
+    },
+    {
+        "user_id": 4,
+        "first_name": "Emily",
+        "last_name": "Taylor",
+        "description": "Marketing Specialist",
+        "phone": "1112223333",
+        "location": "City4",
+        "address": "101 Elm St",
+        "profession": "Marketing",
+        "category": "Marketing"
+    },
+    {
+        "user_id": 5,
+        "first_name": "Chris",
+        "last_name": "Anderson",
+        "description": "Teacher",
+        "phone": "4445556666",
+        "location": "City5",
+        "address": "202 Birch St",
+        "profession": "Education",
+        "category": "Education"
+    },
+    {
+        "user_id": 6,
+        "first_name": "Laura",
+        "last_name": "Robinson",
+        "description": "Chef",
+        "phone": "9998887777",
+        "location": "City6",
+        "address": "303 Maple St",
+        "profession": "Culinary",
+        "category": "Culinary"
+    },
+    {
+        "user_id": 7,
+        "first_name": "Alex",
+        "last_name": "Martinez",
+        "description": "Mechanical Engineer",
+        "phone": "6667778888",
+        "location": "City7",
+        "address": "404 Walnut St",
+        "profession": "Engineering",
+        "category": "Engineering"
+    },
+    {
+        "user_id": 8,
+        "first_name": "Sara",
+        "last_name": "Gonzalez",
+        "description": "Nurse",
+        "phone": "3334445555",
+        "location": "City8",
+        "address": "505 Cedar St",
+        "profession": "Healthcare",
+        "category": "Healthcare"
+    },
+    {
+        "user_id": 9,
+        "first_name": "Daniel",
+        "last_name": "Lopez",
+        "description": "Real Estate Agent",
+        "phone": "7778889999",
+        "location": "City9",
+        "address": "606 Pine St",
+        "profession": "Real Estate",
+        "category": "Real Estate"
+    },
+    {
+        "user_id": 10,
+        "first_name": "Maria",
+        "last_name": "Ramirez",
+        "description": "Journalist",
+        "phone": "2223334444",
+        "location": "City10",
+        "address": "707 Oak St",
+        "profession": "Media",
+        "category": "Media"
+    }
+]

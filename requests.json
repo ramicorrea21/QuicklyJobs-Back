@@ -1,0 +1,92 @@
+[
+    {
+        "user_id": 1,
+        "title": "Need Web Developer",
+        "description": "Looking for a skilled web developer to create a dynamic website.",
+        "category": "IT",
+        "is_remote": true,
+        "location": "City1",
+        "price_range": "$200-$400"
+    },
+    {
+        "user_id": 2,
+        "title": "Graphic Design for Project",
+        "description": "In search of a graphic designer to create visuals for a new project.",
+        "category": "Design",
+        "is_remote": false,
+        "location": "City2",
+        "price_range": "$100-$200"
+    },
+    {
+        "user_id": 3,
+        "title": "Accounting Assistance Needed",
+        "description": "Seeking an experienced accountant to help with financial tasks.",
+        "category": "Finance",
+        "is_remote": true,
+        "location": "City3",
+        "price_range": "$300-$500"
+    },
+    {
+        "user_id": 4,
+        "title": "Marketing Strategy Consultation",
+        "description": "In need of a marketing expert to provide consultation on strategy.",
+        "category": "Marketing",
+        "is_remote": false,
+        "location": "City4",
+        "price_range": "$400-$600"
+    },
+    {
+        "user_id": 5,
+        "title": "Tutor for Science Subjects",
+        "description": "Looking for a tutor to help with science subjects for a high school student.",
+        "category": "Education",
+        "is_remote": true,
+        "location": "City5",
+        "price_range": "$30-$50 per hour"
+    },
+    {
+        "user_id": 6,
+        "title": "Catering for Event",
+        "description": "Hiring a caterer for a special event with a diverse menu.",
+        "category": "Culinary",
+        "is_remote": false,
+        "location": "City6",
+        "price_range": "$500-$800"
+    },
+    {
+        "user_id": 7,
+        "title": "Mechanical Engineering Design",
+        "description": "Need a mechanical engineer for a design project.",
+        "category": "Engineering",
+        "is_remote": true,
+        "location": "City7",
+        "price_range": "$600-$900"
+    },
+    {
+        "user_id": 8,
+        "title": "Healthcare Advisory Services",
+        "description": "Seeking healthcare consultant for advice on medical matters.",
+        "category": "Healthcare",
+        "is_remote": false,
+        "location": "City8",
+        "price_range": "$50-$100 per consultation"
+    },
+    {
+        "user_id": 9,
+        "title": "Real Estate Investment Advice",
+        "description": "Looking for expert advice on real estate investment opportunities.",
+        "category": "Real Estate",
+        "is_remote": true,
+        "location": "City9",
+        "price_range": "$200-$400"
+    },
+    {
+        "user_id": 10,
+        "title": "Journalistic Content Creation",
+        "description": "Hiring a journalist for creating engaging content and news reporting.",
+        "category": "Media",
+        "is_remote": false,
+        "location": "City10",
+        "price_range": "$300-$500"
+    }
+]
