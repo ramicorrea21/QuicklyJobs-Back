@@ -133,7 +133,7 @@ def post_user():
     email = Users.query.filter_by(user_email = user_email). one_or_none()
 
     if handle is not None:
-        return jsonify({"message":"user_handle already exists"}), 400
+        return jsonify({"message":"username already exists"}), 400
     if email is not None:
         return jsonify({"message":"email already exists"}), 400
     
@@ -164,7 +164,7 @@ def login():
         #validate if the credentials are good
         user = Users.query.filter_by(user_email = user_email).one_or_none()
         if user is None or not check_password_hash(user.password, f'{password}'):
-            return jsonify({'message': 'Invalid email or password'}), 401
+            return jsonify({'message': 'Invalid email or password'}), 400
     
         #if the credentials match, generate a login token
         token = create_access_token(
@@ -173,7 +173,7 @@ def login():
                 'id' : user.id
             }
         )
-        return jsonify({'token': f"{token}"})
+        return jsonify({'token': f"{token}"}), 200
     
     except Exception as error:
         return jsonify({"error":f"{error}"})
