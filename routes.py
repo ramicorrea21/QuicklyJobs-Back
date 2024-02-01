@@ -178,8 +178,18 @@ def login():
     except Exception as error:
         return jsonify({"error":f"{error}"})
 
-
-
+#getuserdata
+@app.route('/getuserdata', methods=['GET'])
+@jwt_required()
+def get_user_data():
+    user_id = get_jwt_identity().get("id")
+    user = Users.query.filter_by(id = user_id).one_or_none()
+    if user is None:
+        return jsonify({"error":"token expired"}), 401
+    else:
+        return jsonify(user.serialize()), 200
+    
+    
 
 #post profile
 #update profile
