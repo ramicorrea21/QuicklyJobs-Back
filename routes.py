@@ -176,20 +176,32 @@ def login():
         return jsonify({'token': f"{token}"}), 200
     
     except Exception as error:
-        return jsonify({"error":f"{error}"})
+        return jsonify({"error":f"{error}"}), 500
+    
 
-#getuserdata
-@app.route('/getuserdata', methods=['GET'])
+#fetch user
+    
+@app.route('/fetch_user', methods=['GET'])
 @jwt_required()
-def get_user_data():
-    user_id = get_jwt_identity().get("id")
-    user = Users.query.filter_by(id = user_id).one_or_none()
-    if user is None:
-        return jsonify({"error":"token expired"}), 401
-    else:
-        return jsonify(user.serialize()), 200
-    
-    
+def fetch_user():
+    user_id = get_jwt_identity()["id"]  
+    user_data = Users.query.filter_by(id=user_id).one_or_none()
+    profile_data = Profile.query.filter_by(user_id=user_id).one_or_none()
+
+    if not user_data:
+        return jsonify({"error": "User not found"}), 404
+
+    user_serialized = user_data.serialize()
+    profile_serialized = profile_data.serialize() if profile_data else None
+
+    return jsonify({
+        "user": user_serialized,
+        "profile": profile_serialized
+    }), 200
+
+
+   
+
 
 #post profile
 #update profile
