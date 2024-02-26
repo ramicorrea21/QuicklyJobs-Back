@@ -26,7 +26,9 @@ class Profile(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
     phone = db.Column(db.String(10), nullable=False)
-    location = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    province = db.Column(db.String(100), nullable=False)
     address = db.Column(db.String(200), nullable=False)
     profession = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(50), nullable=False)
@@ -39,7 +41,9 @@ class Profile(db.Model):
             "last_name": self.last_name,
             "description" : self.description,
             "phone" : self.phone,
-            "location": self.location,
+            "country" : self.country,
+            "city" : self.city,
+            "province" : self.province,
             "address" : self.address,
             "profession" : self.profession,
             "category" : self.category
