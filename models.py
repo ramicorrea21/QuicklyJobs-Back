@@ -29,9 +29,10 @@ class Profile(db.Model):
     country = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     province = db.Column(db.String(100), nullable=False)
-    address = db.Column(db.String(200), nullable=False)
     profession = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(50), nullable=False)
+    avatar = db.Column(db.String(250), nullable=True, unique=False)
+    public_image_id = db.Column(db.String(100), unique=False)
         
     def serialize(self):
         return{
@@ -44,9 +45,9 @@ class Profile(db.Model):
             "country" : self.country,
             "city" : self.city,
             "province" : self.province,
-            "address" : self.address,
             "profession" : self.profession,
-            "category" : self.category
+            "category" : self.category,
+            "avatar": self.avatar
         }
 
 class Services(db.Model):
@@ -56,8 +57,12 @@ class Services(db.Model):
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     is_remote = db.Column(db.Boolean, nullable=False)
-    location = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    province = db.Column(db.String(100), nullable=False)
     price_range = db.Column(db.String(100), nullable=False)
+    pictures = db.Column(db.String(250), nullable=False)
+    public_image_id = db.Column(db.String(100), unique=False)
 
     def serliaze(self):
         return{
@@ -67,8 +72,11 @@ class Services(db.Model):
         "description": self.description,
         "category": self.category,
         "is_remote": self.is_remote,
-        "location": self.location,
-        "price_range": self.price_range
+        "country" : self.country,
+        "city" : self.city,
+        "province" : self.province,
+        "price_range": self.price_range,
+        "pictures": self.pictures
         }
     
 class Requests(db.Model):
@@ -78,8 +86,12 @@ class Requests(db.Model):
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     is_remote = db.Column(db.Boolean, nullable=False)
-    location = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    province = db.Column(db.String(100), nullable=False)
     price_range = db.Column(db.String(100), nullable=False)
+    pictures = db.Column(db.String(250), nullable=False)
+    public_image_id = db.Column(db.String(100), unique=False)
 
     def serliaze(self):
         return{
@@ -89,7 +101,11 @@ class Requests(db.Model):
         "description": self.description,
         "category": self.category,
         "is_remote": self.is_remote,
-        "location": self.location,
-        "price_range": self.price_range
+        "country" : self.country,
+        "city" : self.city,
+        "province" : self.province,
+        "price_range": self.price_range,
+        "pictures": self.pictures
         }
+    
     

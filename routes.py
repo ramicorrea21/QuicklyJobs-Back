@@ -8,6 +8,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
+import cloudinary.uploader as uploader
 
 #populate db
 user_path = os.path.join(os.path.dirname(__file__), "users.json")
@@ -207,25 +208,34 @@ def fetch_user():
 @jwt_required()
 def post_profile():
     user_id = get_jwt_identity()["id"]
-    data = request.json
+    body_form = request.form
+    body_file = request.files
     profile_exists = Profile.query.filter_by(user_id=user_id).one_or_none()
 
     if profile_exists:
         return jsonify({"error": "Profile already exists"}), 400
 
     try:
+
+        avatar = body_file.get('avatar')
+
+        result_avatar = uploader.upload(body_file.get("avatar"))
+        avatar = result_avatar.get("secure_url")
+        public_id = result_avatar.get("public_id")
+
         new_profile = Profile(
             user_id=user_id,
-            first_name=data.get('first_name'),
-            last_name=data.get('last_name'),
-            description=data.get('description'),
-            phone=data.get('phone'),
-            country=data.get('country'),
-            city=data.get('city'),
-            province=data.get('province'),
-            address=data.get('address'),
-            profession=data.get('profession'),
-            category=data.get('category')
+            first_name=body_form.get('first_name'),
+            last_name=body_form.get('last_name'),
+            description=body_form.get('description'),
+            phone=body_form.get('phone'),
+            country=body_form.get('country'),
+            city=body_form.get('city'),
+            province=body_form.get('province'),
+            profession=body_form.get('profession'),
+            category=body_form.get('category'),
+            avatar = avatar,
+            public_image_id = public_id
         )
         db.session.add(new_profile)
         db.session.commit()
@@ -246,16 +256,21 @@ def post_profile():
 @jwt_required()
 def update_profile():
     user_id = get_jwt_identity()['id']
-    data = request.json
+    body_form = request.form
+    body_file = request.files
     profile_to_update = Profile.query.filter_by(user_id=user_id).first()
 
     if not profile_to_update:
         return jsonify({"error": "Profile not found"}), 404
 
     # Actualización condicional de campos
-    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'country', 'province' 'address', 'profession', 'category']:
-        if field in data:
-            setattr(profile_to_update, field, data[field])
+    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'country', 'province', 'profession', 'category']:
+        if field in body_form:
+            setattr(profile_to_update, field, body_form[field])
+
+    result_avatar = uploader.upload(body_file.get("avatar"))
+    profile_to_update.avatar = result_avatar.get("secure_url")
+    profile_to_update.public_image_id = result_avatar.get("public_id")
 
     try:
         db.session.commit()
