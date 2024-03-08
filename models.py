@@ -64,7 +64,7 @@ class Services(db.Model):
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
 
-    def serliaze(self):
+    def serialize(self):
         return{
         "id" : self.id,
         "user_id" : self.user_id,
@@ -93,7 +93,7 @@ class Requests(db.Model):
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
 
-    def serliaze(self):
+    def serialize(self):
         return{
         "id" : self.id,
         "user_id" : self.user_id,

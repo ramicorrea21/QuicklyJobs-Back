@@ -278,7 +278,101 @@ def update_profile():
     except Exception as error:
         db.session.rollback()
         return jsonify({"error": str(error)}), 500
+
+
 #post service
+@app.route('/post-service', methods=['POST'])
+@jwt_required()
+def post_service():
+    user_id = get_jwt_identity()['id']
+    body_form = request.form
+    body_file = request.files
+    profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
+
+    if profile_info is None or profile_info.country is None or profile_info.city is None or profile_info.province is None:
+        return jsonify({"error":"profile not complete"})
+
+    try:
+
+        pictures = body_file.get("pictures")
+        result_image = uploader.upload(body_file.get("pictures"))
+        pictures = result_image.get("secure_url")
+        public_image_id = result_image.get("public_id")
+        is_remote_str = request.form.get('is_remote', 'false')
+        is_remote = is_remote_str.lower() == 'true'
+
+        new_service = Services(
+            user_id = user_id,
+            title = body_form.get('title'),
+            description = body_form.get('description'),
+            category = body_form.get('category'),
+            is_remote = is_remote,
+            country = profile_info.country,
+            city = profile_info.city,
+            province = profile_info.province,
+            price_range = body_form.get('price_range'),
+            pictures = pictures,
+            public_image_id = public_image_id
+        )
+
+        db.session.add(new_service)
+        db.session.commit()
+        return jsonify(new_service.serialize()), 201
+    
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({"error": "Data integrity issue"}), 500
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/post-request', methods=['POST'])
+@jwt_required()
+def post_request():
+    user_id = get_jwt_identity()['id']
+    body_form = request.form
+    body_file = request.files
+    profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
+
+    if profile_info is None or profile_info.country is None or profile_info.city is None or profile_info.province is None:
+        return jsonify({"error":"profile not complete"})
+
+    try:
+
+        pictures = body_file.get("pictures")
+        result_image = uploader.upload(body_file.get("pictures"))
+        pictures = result_image.get("secure_url")
+        public_image_id = result_image.get("public_id")
+        is_remote_str = request.form.get('is_remote', 'false')
+        is_remote = is_remote_str.lower() == 'true'
+
+        new_request = Requests(
+            user_id = user_id,
+            title = body_form.get('title'),
+            description = body_form.get('description'),
+            category = body_form.get('category'),
+            is_remote = is_remote,
+            country = profile_info.country,
+            city = profile_info.city,
+            province = profile_info.province,
+            price_range = body_form.get('price_range'),
+            pictures = pictures,
+            public_image_id = public_image_id
+        )
+        
+        db.session.add(new_request)
+        db.session.commit()
+        return jsonify(new_request.serialize()), 201
+    
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({"error": "Data integrity issue"}), 500
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
 #edit service
 #delete service
 #post request
