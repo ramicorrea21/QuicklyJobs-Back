@@ -1,8 +1,8 @@
-"""initial migration
+"""empty message
 
-Revision ID: 8e1d3febe0fa
+Revision ID: 2ea6dbd1b70e
 Revises: 
-Create Date: 2024-03-05 11:16:33.814497
+Create Date: 2024-03-08 10:51:57.734445
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8e1d3febe0fa'
+revision = '2ea6dbd1b70e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,12 +33,12 @@ def upgrade():
     sa.Column('first_name', sa.String(length=50), nullable=False),
     sa.Column('last_name', sa.String(length=50), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
-    sa.Column('phone', sa.String(length=10), nullable=False),
-    sa.Column('country', sa.String(length=100), nullable=False),
-    sa.Column('city', sa.String(length=100), nullable=False),
-    sa.Column('province', sa.String(length=100), nullable=False),
+    sa.Column('phone', sa.String(length=20), nullable=False),
+    sa.Column('aviable', sa.Boolean(), nullable=False),
+    sa.Column('city', sa.String(length=250), nullable=False),
+    sa.Column('state', sa.String(length=250), nullable=False),
     sa.Column('profession', sa.String(length=200), nullable=False),
-    sa.Column('category', sa.String(length=50), nullable=False),
+    sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('avatar', sa.String(length=250), nullable=True),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
@@ -51,9 +51,8 @@ def upgrade():
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('is_remote', sa.Boolean(), nullable=False),
-    sa.Column('country', sa.String(length=100), nullable=False),
-    sa.Column('city', sa.String(length=100), nullable=False),
-    sa.Column('province', sa.String(length=100), nullable=False),
+    sa.Column('city', sa.String(length=250), nullable=False),
+    sa.Column('province', sa.String(length=250), nullable=False),
     sa.Column('price_range', sa.String(length=100), nullable=False),
     sa.Column('pictures', sa.String(length=250), nullable=False),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),
@@ -67,9 +66,8 @@ def upgrade():
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('is_remote', sa.Boolean(), nullable=False),
-    sa.Column('country', sa.String(length=100), nullable=False),
-    sa.Column('city', sa.String(length=100), nullable=False),
-    sa.Column('province', sa.String(length=100), nullable=False),
+    sa.Column('city', sa.String(length=250), nullable=False),
+    sa.Column('province', sa.String(length=250), nullable=False),
     sa.Column('price_range', sa.String(length=100), nullable=False),
     sa.Column('pictures', sa.String(length=250), nullable=False),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),

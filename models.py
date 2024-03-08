@@ -25,12 +25,12 @@ class Profile(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    phone = db.Column(db.String(10), nullable=False)
-    country = db.Column(db.String(100), nullable=False)
-    city = db.Column(db.String(100), nullable=False)
-    province = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    available = db.Column(db.String(250), nullable=False)
+    city = db.Column(db.String(250), nullable=False)
+    state = db.Column(db.String(250), nullable=False)
     profession = db.Column(db.String(200), nullable=False)
-    category = db.Column(db.String(50), nullable=False)
+    category = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(250), nullable=True, unique=False)
     public_image_id = db.Column(db.String(100), unique=False)
         
@@ -42,9 +42,9 @@ class Profile(db.Model):
             "last_name": self.last_name,
             "description" : self.description,
             "phone" : self.phone,
-            "country" : self.country,
+            "available" : self.available,
             "city" : self.city,
-            "province" : self.province,
+            "state" : self.state,
             "profession" : self.profession,
             "category" : self.category,
             "avatar": self.avatar
@@ -57,9 +57,8 @@ class Services(db.Model):
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     is_remote = db.Column(db.Boolean, nullable=False)
-    country = db.Column(db.String(100), nullable=False)
-    city = db.Column(db.String(100), nullable=False)
-    province = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(250), nullable=False)
+    province = db.Column(db.String(250), nullable=False)
     price_range = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
@@ -72,7 +71,6 @@ class Services(db.Model):
         "description": self.description,
         "category": self.category,
         "is_remote": self.is_remote,
-        "country" : self.country,
         "city" : self.city,
         "province" : self.province,
         "price_range": self.price_range,
@@ -86,9 +84,8 @@ class Requests(db.Model):
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     is_remote = db.Column(db.Boolean, nullable=False)
-    country = db.Column(db.String(100), nullable=False)
-    city = db.Column(db.String(100), nullable=False)
-    province = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(250), nullable=False)
+    province = db.Column(db.String(250), nullable=False)
     price_range = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)

@@ -229,9 +229,9 @@ def post_profile():
             last_name=body_form.get('last_name'),
             description=body_form.get('description'),
             phone=body_form.get('phone'),
-            country=body_form.get('country'),
+            available=body_form.get('available'),
             city=body_form.get('city'),
-            province=body_form.get('province'),
+            state=body_form.get('state'),
             profession=body_form.get('profession'),
             category=body_form.get('category'),
             avatar = avatar,
@@ -264,7 +264,7 @@ def update_profile():
         return jsonify({"error": "Profile not found"}), 404
 
     # Actualización condicional de campos
-    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'country', 'province', 'profession', 'category']:
+    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'available', 'state', 'profession', 'category']:
         if field in body_form:
             setattr(profile_to_update, field, body_form[field])
 
@@ -307,9 +307,8 @@ def post_service():
             description = body_form.get('description'),
             category = body_form.get('category'),
             is_remote = is_remote,
-            country = profile_info.country,
             city = profile_info.city,
-            province = profile_info.province,
+            state = profile_info.state,
             price_range = body_form.get('price_range'),
             pictures = pictures,
             public_image_id = public_image_id
@@ -353,9 +352,8 @@ def post_request():
             description = body_form.get('description'),
             category = body_form.get('category'),
             is_remote = is_remote,
-            country = profile_info.country,
             city = profile_info.city,
-            province = profile_info.province,
+            state = profile_info.state,
             price_range = body_form.get('price_range'),
             pictures = pictures,
             public_image_id = public_image_id
