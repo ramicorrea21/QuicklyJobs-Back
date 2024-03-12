@@ -56,10 +56,11 @@ class Services(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
-    is_remote = db.Column(db.Boolean, nullable=False)
+    remote = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(250), nullable=False)
-    province = db.Column(db.String(250), nullable=False)
-    price_range = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(250), nullable=False)
+    price_min = db.Column(db.String(100), nullable=False)
+    price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
 
@@ -70,10 +71,11 @@ class Services(db.Model):
         "title": self.title,
         "description": self.description,
         "category": self.category,
-        "is_remote": self.is_remote,
+        "is_remote": self.remote,
         "city" : self.city,
-        "province" : self.province,
-        "price_range": self.price_range,
+        "state" : self.state,
+        "price_min": self.price_min,
+        "price_max": self.price_max,
         "pictures": self.pictures
         }
     
@@ -83,10 +85,11 @@ class Requests(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
-    is_remote = db.Column(db.Boolean, nullable=False)
+    remote = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(250), nullable=False)
-    province = db.Column(db.String(250), nullable=False)
-    price_range = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(250), nullable=False)
+    price_min = db.Column(db.String(100), nullable=False)
+    price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
 
@@ -97,11 +100,11 @@ class Requests(db.Model):
         "title": self.title,
         "description": self.description,
         "category": self.category,
-        "is_remote": self.is_remote,
-        "country" : self.country,
+        "remote": self.remote,
         "city" : self.city,
-        "province" : self.province,
-        "price_range": self.price_range,
+        "state" : self.state,
+        "price_min": self.price_min,
+        "price_max": self.price_max,
         "pictures": self.pictures
         }
     

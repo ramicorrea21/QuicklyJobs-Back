@@ -289,27 +289,26 @@ def post_service():
     body_file = request.files
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
 
-    if profile_info is None or profile_info.country is None or profile_info.city is None or profile_info.province is None:
+    if profile_info is None  or profile_info.city is None or profile_info.state is None:
         return jsonify({"error":"profile not complete"})
 
     try:
 
-        pictures = body_file.get("pictures")
-        result_image = uploader.upload(body_file.get("pictures"))
+        pictures = body_file.get("images")
+        result_image = uploader.upload(body_file.get("images"))
         pictures = result_image.get("secure_url")
         public_image_id = result_image.get("public_id")
-        is_remote_str = request.form.get('is_remote', 'false')
-        is_remote = is_remote_str.lower() == 'true'
 
         new_service = Services(
             user_id = user_id,
             title = body_form.get('title'),
             description = body_form.get('description'),
             category = body_form.get('category'),
-            is_remote = is_remote,
+            remote = body_form.get("remote"),
             city = profile_info.city,
             state = profile_info.state,
-            price_range = body_form.get('price_range'),
+            price_min = body_form.get('price_min'),
+            price_max = body_form.get('price_max'),
             pictures = pictures,
             public_image_id = public_image_id
         )
@@ -334,27 +333,26 @@ def post_request():
     body_file = request.files
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
 
-    if profile_info is None or profile_info.country is None or profile_info.city is None or profile_info.province is None:
+    if profile_info is None or profile_info.city is None or profile_info.state is None:
         return jsonify({"error":"profile not complete"})
 
     try:
 
-        pictures = body_file.get("pictures")
-        result_image = uploader.upload(body_file.get("pictures"))
+        pictures = body_file.get("images")
+        result_image = uploader.upload(body_file.get("images"))
         pictures = result_image.get("secure_url")
         public_image_id = result_image.get("public_id")
-        is_remote_str = request.form.get('is_remote', 'false')
-        is_remote = is_remote_str.lower() == 'true'
 
         new_request = Requests(
             user_id = user_id,
             title = body_form.get('title'),
             description = body_form.get('description'),
             category = body_form.get('category'),
-            is_remote = is_remote,
+            remote = body_form.get('remote'),
             city = profile_info.city,
             state = profile_info.state,
-            price_range = body_form.get('price_range'),
+            price_min = body_form.get('price_min'),
+            price_max = body_form.get('price_max'),
             pictures = pictures,
             public_image_id = public_image_id
         )
