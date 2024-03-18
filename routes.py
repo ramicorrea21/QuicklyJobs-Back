@@ -288,6 +288,7 @@ def post_service():
     body_form = request.form
     body_file = request.files
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
+    user = Users.query.filter_by(id = user_id).one_or_none()
 
     if profile_info is None  or profile_info.city is None or profile_info.state is None:
         return jsonify({"error":"profile not complete"})
@@ -310,7 +311,9 @@ def post_service():
             price_min = body_form.get('price_min'),
             price_max = body_form.get('price_max'),
             pictures = pictures,
-            public_image_id = public_image_id
+            public_image_id = public_image_id,
+            avatar = profile_info.avatar,
+            user_handle = user.user_handle
         )
 
         db.session.add(new_service)
@@ -332,6 +335,7 @@ def post_request():
     body_form = request.form
     body_file = request.files
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
+    user = Users.query.filter_by(id = user_id).one_or_none()
 
     if profile_info is None or profile_info.city is None or profile_info.state is None:
         return jsonify({"error":"profile not complete"})
@@ -354,7 +358,9 @@ def post_request():
             price_min = body_form.get('price_min'),
             price_max = body_form.get('price_max'),
             pictures = pictures,
-            public_image_id = public_image_id
+            public_image_id = public_image_id,
+            avatar = profile_info.avatar,
+            user_handle = user.user_handle
         )
         
         db.session.add(new_request)
@@ -367,6 +373,17 @@ def post_request():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+#get all services
+@app.route('/services', methods=['GET'])
+def get_services():
+    services = Services.query.all()
+    return jsonify(list(map(lambda service: service.serialize(), services)))
+
+@app.route('/requests', methods=['GET'])
+def get_requests():
+    requests = Requests.query.all()
+    return jsonify(list(map(lambda request: request.serialize(), requests)))
 
 
 #edit service

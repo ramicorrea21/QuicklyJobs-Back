@@ -33,6 +33,7 @@ class Profile(db.Model):
     category = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(250), nullable=True, unique=False)
     public_image_id = db.Column(db.String(100), unique=False)
+    
         
     def serialize(self):
         return{
@@ -63,6 +64,8 @@ class Services(db.Model):
     price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
+    avatar = db.Column(db.String(250), unique=False, nullable=False)
+    user_handle = db.Column(db.String(50), unique=False, nullable=False)
 
     def serialize(self):
         return{
@@ -76,7 +79,9 @@ class Services(db.Model):
         "state" : self.state,
         "price_min": self.price_min,
         "price_max": self.price_max,
-        "pictures": self.pictures
+        "pictures": self.pictures,
+        "avatar": self.avatar,
+        "user_handle": self.user_handle
         }
     
 class Requests(db.Model):
@@ -92,6 +97,8 @@ class Requests(db.Model):
     price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
     public_image_id = db.Column(db.String(100), unique=False)
+    avatar = db.Column(db.String(250), unique=False, nullable=False)
+    user_handle = db.Column(db.String(50), unique=False, nullable=False)
 
     def serialize(self):
         return{
@@ -105,7 +112,9 @@ class Requests(db.Model):
         "state" : self.state,
         "price_min": self.price_min,
         "price_max": self.price_max,
-        "pictures": self.pictures
+        "pictures": self.pictures,
+        "avatar": self.avatar,
+        "user_handle": self.user_handle
         }
     
     

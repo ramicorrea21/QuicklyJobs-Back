@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2ea6dbd1b70e
+Revision ID: 46b593cd8261
 Revises: 
-Create Date: 2024-03-08 10:51:57.734445
+Create Date: 2024-03-13 11:49:30.922830
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2ea6dbd1b70e'
+revision = '46b593cd8261'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,7 +34,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=50), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('phone', sa.String(length=20), nullable=False),
-    sa.Column('aviable', sa.Boolean(), nullable=False),
+    sa.Column('available', sa.String(length=250), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
     sa.Column('state', sa.String(length=250), nullable=False),
     sa.Column('profession', sa.String(length=200), nullable=False),
@@ -50,12 +50,15 @@ def upgrade():
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('category', sa.String(length=100), nullable=False),
-    sa.Column('is_remote', sa.Boolean(), nullable=False),
+    sa.Column('remote', sa.String(length=10), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
-    sa.Column('province', sa.String(length=250), nullable=False),
-    sa.Column('price_range', sa.String(length=100), nullable=False),
+    sa.Column('state', sa.String(length=250), nullable=False),
+    sa.Column('price_min', sa.String(length=100), nullable=False),
+    sa.Column('price_max', sa.String(length=100), nullable=False),
     sa.Column('pictures', sa.String(length=250), nullable=False),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),
+    sa.Column('avatar', sa.String(length=250), nullable=False),
+    sa.Column('user_handle', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -65,12 +68,15 @@ def upgrade():
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('category', sa.String(length=100), nullable=False),
-    sa.Column('is_remote', sa.Boolean(), nullable=False),
+    sa.Column('remote', sa.String(length=10), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
-    sa.Column('province', sa.String(length=250), nullable=False),
-    sa.Column('price_range', sa.String(length=100), nullable=False),
+    sa.Column('state', sa.String(length=250), nullable=False),
+    sa.Column('price_min', sa.String(length=100), nullable=False),
+    sa.Column('price_max', sa.String(length=100), nullable=False),
     sa.Column('pictures', sa.String(length=250), nullable=False),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),
+    sa.Column('avatar', sa.String(length=250), nullable=False),
+    sa.Column('user_handle', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
