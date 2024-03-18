@@ -33,7 +33,9 @@ class Profile(db.Model):
     category = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(250), nullable=True, unique=False)
     public_image_id = db.Column(db.String(100), unique=False)
-    
+    company = db.Column(db.String(250), unique=False)
+    role = db.Column(db.String(250), unique=False)
+    experience = db.Column(db.String(250), unique=False)
         
     def serialize(self):
         return{
@@ -48,7 +50,10 @@ class Profile(db.Model):
             "state" : self.state,
             "profession" : self.profession,
             "category" : self.category,
-            "avatar": self.avatar
+            "avatar": self.avatar,
+            "company" : self.company,
+            "role": self.role,
+            "experience" : self.experience
         }
 
 class Services(db.Model):

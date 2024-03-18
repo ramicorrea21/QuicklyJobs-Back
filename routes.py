@@ -235,7 +235,10 @@ def post_profile():
             profession=body_form.get('profession'),
             category=body_form.get('category'),
             avatar = avatar,
-            public_image_id = public_id
+            public_image_id = public_id,
+            company = body_form.get('company'),
+            role = body_form.get('company'),
+            experience = body_form.get('experience')
         )
         db.session.add(new_profile)
         db.session.commit()
@@ -384,6 +387,36 @@ def get_services():
 def get_requests():
     requests = Requests.query.all()
     return jsonify(list(map(lambda request: request.serialize(), requests)))
+
+@app.route('/service/<int:user_id>/<int:id>', methods=['GET'])
+def get_service_detail(user_id, id):
+    service = Services.query.filter_by(id = id).one_or_none()
+    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
+
+    if service is None or profile is None:
+        return jsonify({"error":"missing service"}), 404
+    return jsonify(service.serialize(), profile.serialize()), 200
+
+
+@app.route('/request/<int:user_id>/<int:id>', methods=['GET'])
+def get_request_detail(user_id, id):
+    request = Requests.query.filter_by(id = id).one_or_none()
+    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
+
+    if request is None or profile is None:
+        return jsonify({"error":"missing service"}), 404
+    return jsonify(request.serialize(), profile.serialize()), 200
+
+@app.route('/publicprofile/<int:user_id>', methods=['GET'])
+def get_public_profile(user_id):
+    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
+    user = Users.query.filter_by(id = user_id).one_or_none()
+    if profile is None or user is None:
+        return jsonify({"error":"profile not found"})
+    
+    return jsonify(profile.serialize())
+
+
 
 
 #edit service
