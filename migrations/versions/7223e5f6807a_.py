@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 46b593cd8261
+Revision ID: 7223e5f6807a
 Revises: 
-Create Date: 2024-03-13 11:49:30.922830
+Create Date: 2024-03-19 08:55:24.540113
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '46b593cd8261'
+revision = '7223e5f6807a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,10 +37,14 @@ def upgrade():
     sa.Column('available', sa.String(length=250), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
     sa.Column('state', sa.String(length=250), nullable=False),
+    sa.Column('country', sa.String(length=250), nullable=False),
     sa.Column('profession', sa.String(length=200), nullable=False),
     sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('avatar', sa.String(length=250), nullable=True),
     sa.Column('public_image_id', sa.String(length=100), nullable=True),
+    sa.Column('company', sa.String(length=250), nullable=True),
+    sa.Column('role', sa.String(length=250), nullable=True),
+    sa.Column('experience', sa.String(length=250), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -52,6 +56,7 @@ def upgrade():
     sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('remote', sa.String(length=10), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
+    sa.Column('country', sa.String(length=250), nullable=False),
     sa.Column('state', sa.String(length=250), nullable=False),
     sa.Column('price_min', sa.String(length=100), nullable=False),
     sa.Column('price_max', sa.String(length=100), nullable=False),
@@ -71,6 +76,7 @@ def upgrade():
     sa.Column('remote', sa.String(length=10), nullable=False),
     sa.Column('city', sa.String(length=250), nullable=False),
     sa.Column('state', sa.String(length=250), nullable=False),
+    sa.Column('country', sa.String(length=250), nullable=False),
     sa.Column('price_min', sa.String(length=100), nullable=False),
     sa.Column('price_max', sa.String(length=100), nullable=False),
     sa.Column('pictures', sa.String(length=250), nullable=False),

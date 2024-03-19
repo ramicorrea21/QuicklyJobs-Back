@@ -231,14 +231,16 @@ def post_profile():
             phone=body_form.get('phone'),
             available=body_form.get('available'),
             city=body_form.get('city'),
-            state=body_form.get('state'),
+            country = body_form.get('country'),
             profession=body_form.get('profession'),
             category=body_form.get('category'),
             avatar = avatar,
             public_image_id = public_id,
             company = body_form.get('company'),
-            role = body_form.get('company'),
-            experience = body_form.get('experience')
+            role = body_form.get('role'),
+            experience = body_form.get('experience'),
+            hiring  = body_form.get('hiring'),
+            looking_for = body_form.get('looking_for')
         )
         db.session.add(new_profile)
         db.session.commit()
@@ -255,25 +257,25 @@ def post_profile():
 
 #update profile
 
-@app.route('/profile', methods=['PUT'])
-@jwt_required()
-def update_profile():
-    user_id = get_jwt_identity()['id']
-    body_form = request.form
-    body_file = request.files
-    profile_to_update = Profile.query.filter_by(user_id=user_id).first()
+# @app.route('/profile', methods=['PUT'])
+# @jwt_required()
+# def update_profile():
+#     user_id = get_jwt_identity()['id']
+#     body_form = request.form
+#     body_file = request.files
+#     profile_to_update = Profile.query.filter_by(user_id=user_id).first()
 
-    if not profile_to_update:
-        return jsonify({"error": "Profile not found"}), 404
+#     if not profile_to_update:
+#         return jsonify({"error": "Profile not found"}), 404
 
-    # Actualización condicional de campos
-    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'available', 'state', 'profession', 'category']:
-        if field in body_form:
-            setattr(profile_to_update, field, body_form[field])
+#     # Actualización condicional de campos
+#     for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'available', 'state', 'profession', 'category']:
+#         if field in body_form:
+#             setattr(profile_to_update, field, body_form[field])
 
-    result_avatar = uploader.upload(body_file.get("avatar"))
-    profile_to_update.avatar = result_avatar.get("secure_url")
-    profile_to_update.public_image_id = result_avatar.get("public_id")
+#     result_avatar = uploader.upload(body_file.get("avatar"))
+#     profile_to_update.avatar = result_avatar.get("secure_url")
+#     profile_to_update.public_image_id = result_avatar.get("public_id")
 
     try:
         db.session.commit()
@@ -293,7 +295,7 @@ def post_service():
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
     user = Users.query.filter_by(id = user_id).one_or_none()
 
-    if profile_info is None  or profile_info.city is None or profile_info.state is None:
+    if profile_info is None  or profile_info.city is None is None:
         return jsonify({"error":"profile not complete"})
 
     try:
@@ -310,7 +312,7 @@ def post_service():
             category = body_form.get('category'),
             remote = body_form.get("remote"),
             city = profile_info.city,
-            state = profile_info.state,
+            country = profile_info.country,
             price_min = body_form.get('price_min'),
             price_max = body_form.get('price_max'),
             pictures = pictures,
@@ -340,7 +342,7 @@ def post_request():
     profile_info = Profile.query.filter_by(user_id=user_id).one_or_none()
     user = Users.query.filter_by(id = user_id).one_or_none()
 
-    if profile_info is None or profile_info.city is None or profile_info.state is None:
+    if profile_info is None or profile_info.city is None  is None:
         return jsonify({"error":"profile not complete"})
 
     try:
@@ -357,7 +359,7 @@ def post_request():
             category = body_form.get('category'),
             remote = body_form.get('remote'),
             city = profile_info.city,
-            state = profile_info.state,
+            country = profile_info.country,
             price_min = body_form.get('price_min'),
             price_max = body_form.get('price_max'),
             pictures = pictures,
@@ -414,7 +416,7 @@ def get_public_profile(user_id):
     if profile is None or user is None:
         return jsonify({"error":"profile not found"})
     
-    return jsonify(profile.serialize())
+    return jsonify(profile.serialize(), user.serialize( ))
 
 
 

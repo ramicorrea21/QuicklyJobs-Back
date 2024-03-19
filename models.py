@@ -28,7 +28,7 @@ class Profile(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     available = db.Column(db.String(250), nullable=False)
     city = db.Column(db.String(250), nullable=False)
-    state = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(250), nullable=False)
     profession = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(250), nullable=True, unique=False)
@@ -36,6 +36,8 @@ class Profile(db.Model):
     company = db.Column(db.String(250), unique=False)
     role = db.Column(db.String(250), unique=False)
     experience = db.Column(db.String(250), unique=False)
+    hiring = db.Column(db.String(3), unique=False)
+    looking_for = db.Column(db.String(3), unique=False)
         
     def serialize(self):
         return{
@@ -47,13 +49,15 @@ class Profile(db.Model):
             "phone" : self.phone,
             "available" : self.available,
             "city" : self.city,
-            "state" : self.state,
+            "country": self.country,
             "profession" : self.profession,
             "category" : self.category,
             "avatar": self.avatar,
             "company" : self.company,
             "role": self.role,
-            "experience" : self.experience
+            "experience" : self.experience,
+            "hiring": self.hiring,
+            "looking_for" : self.looking_for
         }
 
 class Services(db.Model):
@@ -64,7 +68,7 @@ class Services(db.Model):
     category = db.Column(db.String(100), nullable=False)
     remote = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(250), nullable=False)
-    state = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(250), nullable=False)
     price_min = db.Column(db.String(100), nullable=False)
     price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
@@ -81,7 +85,7 @@ class Services(db.Model):
         "category": self.category,
         "is_remote": self.remote,
         "city" : self.city,
-        "state" : self.state,
+        "country": self.country,
         "price_min": self.price_min,
         "price_max": self.price_max,
         "pictures": self.pictures,
@@ -97,7 +101,7 @@ class Requests(db.Model):
     category = db.Column(db.String(100), nullable=False)
     remote = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(250), nullable=False)
-    state = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(250), nullable=False)
     price_min = db.Column(db.String(100), nullable=False)
     price_max = db.Column(db.String(100), nullable=False)
     pictures = db.Column(db.String(250), nullable=False)
@@ -114,7 +118,7 @@ class Requests(db.Model):
         "category": self.category,
         "remote": self.remote,
         "city" : self.city,
-        "state" : self.state,
+        "country": self.country,
         "price_min": self.price_min,
         "price_max": self.price_max,
         "pictures": self.pictures,
