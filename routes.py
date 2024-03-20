@@ -322,7 +322,8 @@ def post_service():
             pictures = pictures,
             public_image_id = public_image_id,
             avatar = profile_info.avatar,
-            user_handle = user.user_handle
+            user_handle = user.user_handle,
+            profession = profile_info.profession
         )
 
         db.session.add(new_service)
@@ -369,7 +370,8 @@ def post_request():
             pictures = pictures,
             public_image_id = public_image_id,
             avatar = profile_info.avatar,
-            user_handle = user.user_handle
+            user_handle = user.user_handle,
+            profession = profile_info.profession
         )
         
         db.session.add(new_request)
