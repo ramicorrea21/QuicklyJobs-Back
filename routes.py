@@ -257,25 +257,29 @@ def post_profile():
 
 #update profile
 
-# @app.route('/profile', methods=['PUT'])
-# @jwt_required()
-# def update_profile():
-#     user_id = get_jwt_identity()['id']
-#     body_form = request.form
-#     body_file = request.files
-#     profile_to_update = Profile.query.filter_by(user_id=user_id).first()
+@app.route('/profile', methods=['PUT'])
+@jwt_required()
+def update_profile():
+    user_id = get_jwt_identity()['id']
+    body_form = request.form
+    body_file = request.files
+    profile_to_update = Profile.query.filter_by(user_id=user_id).first()
 
-#     if not profile_to_update:
-#         return jsonify({"error": "Profile not found"}), 404
+    if not profile_to_update:
+        return jsonify({"error": "Profile not found"}), 404
 
-#     # Actualización condicional de campos
-#     for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'available', 'state', 'profession', 'category']:
-#         if field in body_form:
-#             setattr(profile_to_update, field, body_form[field])
+    for field in ['first_name', 'last_name', 'description', 'phone', 'city', 'available', 'country', 'profession', 'category', 'company', 'role', 'experience', 'hiring', 'looking_for']:
+        if field in body_form:
+            setattr(profile_to_update, field, body_form[field])
 
-#     result_avatar = uploader.upload(body_file.get("avatar"))
-#     profile_to_update.avatar = result_avatar.get("secure_url")
-#     profile_to_update.public_image_id = result_avatar.get("public_id")
+    if 'avatar' in body_file and body_file['avatar']:
+        try:
+            result_avatar = uploader.upload(body_file.get("avatar"))
+            profile_to_update.avatar = result_avatar.get("secure_url")
+            profile_to_update.public_image_id = result_avatar.get("public_id")
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"error": str(e)}), 500
 
     try:
         db.session.commit()
