@@ -36,32 +36,37 @@ def user_population():
             db.session.rollback()
             return jsonify({"error":f"{error.args}"})
 
-@app.route("/profiles-population", methods=["GET"])
 def profiles_population():
-    with open(profiles_path, "r") as file:
+    with open('profiles.json', 'r') as file:  
         data = json.load(file)
-        file.close
 
-    for profile in data:
+    for profile_data in data:
         profile = Profile(
-            user_id=profile['user_id'],
-            first_name = profile['first_name'],
-            last_name = profile['last_name'],
-            description = profile['description'],
-            phone = profile['phone'],
-            location = profile['location'],
-            address = profile['address'],
-            profession = profile['profession'],
-            category = profile['category']
+            user_id=profile_data['user_id'],
+            first_name=profile_data['first_name'],
+            last_name=profile_data['last_name'],
+            description=profile_data['description'],
+            phone=profile_data['phone'],
+            available=profile_data['available'],
+            city=profile_data['city'],
+            country=profile_data['country'],
+            profession=profile_data['profession'],
+            category=profile_data['category'],
+            avatar=profile_data['avatar'],
+            company=profile_data['company'],
+            role=profile_data['role'],
+            experience=profile_data['experience'],
+            hiring=profile_data['hiring'],
+            looking_for=profile_data['looking_for']
         )
         db.session.add(profile)
 
     try:
         db.session.commit()
-        return jsonify({"message":"profiles populated"})
+        return jsonify({"message": "Profiles populated successfully."}), 200
     except Exception as error:
         db.session.rollback()
-        return jsonify({"error":f"{error.args}"})
+        return jsonify({"error": str(error)}), 500
 
 @app.route('/services-population', methods=["GET"])
 def services_population():

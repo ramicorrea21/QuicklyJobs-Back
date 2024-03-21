@@ -1,14 +1,14 @@
-Vista de complete profile:
+<!-- Vista de complete profile:
 -Fetchear api de paises, provincias y ciudades.
 -Agregar hiring
 -Agregar looking for oportinities
--Agregar experciencia (rol, compania, exp)
+-Agregar experciencia (rol, compania, exp) -->
+<!-- 
+-Arreglar routing luego de completar perfil y manejo de errores. -->
 
--Arreglar routing luego de completar perfil y manejo de errores.
-
-Vista de profile:
+<!-- Vista de profile:
 Agregar modals para editar el perfil
--Agregar esqueleto de carga
+-Agregar esqueleto de carga -->
 
 Vista de agregar request/service:
 -Controlar una descripcion mas grande y arreglar errores visuales de la card:
@@ -30,8 +30,7 @@ Landing Page:
 -Agregar Footer
 -Mejorar diseño
 
-Navbar:
--Arreglar Responsive Design.
+Navb r Responsive Design.
 
 General:
 mejorar el responsive.

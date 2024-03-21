@@ -1,52 +1,52 @@
 [
     {
-        "user_handle": "user0",
-        "user_email": "user0@example.com",
+        "user_handle": "randalsanchez",
+        "user_email": "randalsanchez@example.com",
         "password": "password0"
     },
     {
-        "user_handle": "user1",
-        "user_email": "user1@example.com",
+        "user_handle": "beanmaxwell",
+        "user_email": "beanmaxwell@example.com",
         "password": "password1"
     },
     {
-        "user_handle": "user2",
-        "user_email": "user2@example.com",
+        "user_handle": "annemack",
+        "user_email": "annemack@example.com",
         "password": "password2"
     },
     {
-        "user_handle": "user3",
-        "user_email": "user3@example.com",
+        "user_handle": "gordonheater",
+        "user_email": "gordonheater@example.com",
         "password": "password3"
     },
     {
-        "user_handle": "user4",
-        "user_email": "user4@example.com",
+        "user_handle": "marvinwest",
+        "user_email": "marvinwest@example.com",
         "password": "password4"
     },
     {
-        "user_handle": "user5",
-        "user_email": "user5@example.com",
+        "user_handle": "michellemaxwell",
+        "user_email": "michellemaxwell@example.com",
         "password": "password5"
     },
     {
-        "user_handle": "user6",
-        "user_email": "user6@example.com",
+        "user_handle": "lisacoleman",
+        "user_email": "lisacoleman@example.com",
         "password": "password6"
     },
     {
-        "user_handle": "user7",
-        "user_email": "user7@example.com",
+        "user_handle": "ryanbrown",
+        "user_email": "ryanbrown@example.com",
         "password": "password7"
     },
     {
-        "user_handle": "user8",
-        "user_email": "user8@example.com",
+        "user_handle": "elizabethcarter",
+        "user_email": "elizabethcarter@example.com",
         "password": "password8"
     },
     {
-        "user_handle": "user9",
-        "user_email": "user9@example.com",
+        "user_handle": "juanpratt",
+        "user_email": "juanpratt@example.com",
         "password": "password9"
     }
 ]
