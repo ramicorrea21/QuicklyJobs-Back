@@ -9,12 +9,20 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
 import cloudinary.uploader as uploader
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 #populate db
 user_path = os.path.join(os.path.dirname(__file__), "users.json")
 profiles_path = os.path.join(os.path.dirname(__file__), "profiles.json")
 services_path = os.path.join(os.path.dirname(__file__), "services.json")
 requests_path = os.path.join(os.path.dirname(__file__), "requests.json")
+
+smtp_address = os.getenv("SMTP_ADDRESS") 
+smtp_port = os.getenv("SMTP_PORT") 
+email_address = os.getenv("EMAIL_ADDRESS") 
+email_password = os.getenv("EMAIL_PASSWORD") 
 
 @app.route("/user-population", methods=["GET"])
 def user_population():
@@ -437,9 +445,141 @@ def get_profile(id):
     if profile is None:
         return jsonify({"error":"profile not found"}), 404
     return jsonify(profile.serialize()), 200
+
+def send_email(subject, to, body):
     
+    message = MIMEMultipart("alternative")
+    message["Subject"] = subject
+    message["From"] = 'notificationquicklyjobs@gmail.com'
+    message["To"] = to
+
+    html = '''
+        <html>
+        <body>
+        ''' + body + '''   
+        </body>
+        </html>
+    '''
+
+    #crear los elemento MIME
+    html_mime = MIMEText(html, 'html')
+
+    #adjuntamos el código html al mensaje
+    message.attach(html_mime)
+
+    try:
+        print("me ejecuto en el endpoint en enviar mensaje")
+
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_address, 465, context=context) as server:
+            server.login('notificationquicklyjobs@gmail.com', email_password)
+            server.sendmail('notificationquicklyjobs@gmail.com', to, message.as_string())
+            print("me ejecuto")
+        return True
+    except Exception as error:
+        print(str(error))
+        return False
+
+def email_send(subject, recipient, message):
+    message = f"Subject: {subject}\nTo: {recipient}\n{message}"
+    try:
+        server = smtplib.SMTP(smtp_address, 465)
+        server.starttls()
+        server.login('notificationquicklyjobs@gmail.com', email_password)
+        server.sendmail('notificationquicklyjobs@gmail.com', recipient, message)
+        server.quit()
+        print('message has been sent')
+        return True
+    except Exception as error:
+        print(error)
+        print('This is the error capture')
+        return False
 
 
+@app.route('/sendemail', methods=['POST'])
+def send_email_app():
+    request_data = request.json
+    print(request_data)
+    
+    # Verifica que todos los campos necesarios estén en el JSON
+    required_fields = ["offer_title", "phone", "email", "subject", "to"]
+    for field in required_fields:
+        if field not in request_data or not request_data[field]:
+            return jsonify(f"Field {field} is missing or empty"), 400
+    
+    title = request_data["offer_title"]
+    phone = request_data["phone"]
+    email = request_data["email"]
+    subject = request_data["subject"]
+    recipient = request_data["to"]
+    to_name = request_data['to_name']
+    my_name = request_data['my_name']
+
+    # Aquí puedes construir tu mensaje HTML como lo necesites.
+    email_message = f'''
+<html>
+    <head>
+        <style>
+            body {{
+                font-family: 'Arial', sans-serif;
+                color: #333;
+            }}
+            .container {{
+                width: 80%;
+                margin: auto;
+                background-color: #f8f8f8;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }}
+            .header {{
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }}
+            .footer {{
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>Interested in Your Offer on QuicklyJobs</h2>
+            </div>
+            <p>Dear {to_name},</p>
+            <p>I recently came across your offer titled "<strong>{title}</strong>" on QuicklyJobs, and I am very interested in learning more about this opportunity. I believe that my skills and experiences align well with the requirements you have posted, and I am eager to bring my contributions to the table.</p>
+            
+            <p>Please find my contact information below to coordinate a meeting where we can discuss this in further detail:</p>
+            <p><strong>Phone:</strong> {phone}</p>
+            <p><strong>Email:</strong> {email}</p>
+            
+            <p>I am looking forward to your response and hope to speak with you soon.</p>
+            
+            <p>Best regards,</p>
+            <p>{my_name}</p>
+            
+            <div class="footer">
+                <p>Thank you for considering my application.</p>
+            </div>
+        </div>
+    </body>
+</html>
+'''
+    
+    result = send_email(subject, recipient, email_message)
+    if result:
+        return jsonify("Message has been sent"), 200
+    else:
+        return jsonify("Message failed"), 500
 
 #edit service
 #delete service
