@@ -1,0 +1,16 @@
+[
+    {
+        "user_id": 1,
+        "title": "Particular Teacher",
+        "description": "I offer particular teacher services near my location",
+        "remote": "no",
+        "city": "Sarahstad",
+        "country": "Australia",
+        "price_min": "200",
+        "price_max": "300",
+        "pictures": "https://picsum.photos/200",
+        "avatar": "https://picsum.photos/200",
+        "user_handle": "randalsanchez",
+        "profession": "Automotive engineer"
+    }
+]

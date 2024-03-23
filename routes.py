@@ -36,6 +36,7 @@ def user_population():
             db.session.rollback()
             return jsonify({"error":f"{error.args}"})
 
+@app.route('/profile-population', methods=['GET'])
 def profiles_population():
     with open('profiles.json', 'r') as file:  
         data = json.load(file)
@@ -80,9 +81,15 @@ def services_population():
             title = service['title'],
             description = service['description'],
             category = service['category'],
-            is_remote = service['is_remote'],
-            location = service['location'],
-            price_range = service['price_range']
+            remote = service['remote'],
+            city = service['city'],
+            country = service['country'],
+            price_min = service['price_min'],
+            price_max = service['price_max'],
+            pictures = service['pictures'],
+            avatar = service['avatar'],
+            user_handle = service['user_handle'],
+            profession = service['profession']
         )
         db.session.add(service)
     try:
@@ -401,34 +408,36 @@ def get_requests():
     requests = Requests.query.all()
     return jsonify(list(map(lambda request: request.serialize(), requests)))
 
-@app.route('/service/<int:user_id>/<int:id>', methods=['GET'])
-def get_service_detail(user_id, id):
+@app.route('/service/<int:id>', methods=['GET'])
+def get_service_detail(id):
     service = Services.query.filter_by(id = id).one_or_none()
-    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
-
-    if service is None or profile is None:
+    if service is None:
         return jsonify({"error":"missing service"}), 404
-    return jsonify(service.serialize(), profile.serialize()), 200
+    return jsonify(service.serialize()), 200
 
 
-@app.route('/request/<int:user_id>/<int:id>', methods=['GET'])
-def get_request_detail(user_id, id):
+@app.route('/request/<int:id>', methods=['GET'])
+def get_request_detail(id):
     request = Requests.query.filter_by(id = id).one_or_none()
-    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
-
-    if request is None or profile is None:
+    if request is None:
         return jsonify({"error":"missing service"}), 404
-    return jsonify(request.serialize(), profile.serialize()), 200
+    return jsonify(request.serialize()), 200
 
-@app.route('/publicprofile/<int:user_id>', methods=['GET'])
+@app.route('/user/<int:user_id>', methods=['GET'])
 def get_public_profile(user_id):
-    profile = Profile.query.filter_by(user_id = user_id).one_or_none()
     user = Users.query.filter_by(id = user_id).one_or_none()
-    if profile is None or user is None:
+    if  user is None:
         return jsonify({"error":"profile not found"})
     
-    return jsonify(profile.serialize(), user.serialize( ))
+    return jsonify(user.serialize( ))
 
+@app.route('/profile/<int:id>', methods=['GET'])
+def get_profile(id):
+    profile = Profile.query.filter_by(user_id = id).one_or_none()
+    if profile is None:
+        return jsonify({"error":"profile not found"}), 404
+    return jsonify(profile.serialize()), 200
+    
 
 
 
