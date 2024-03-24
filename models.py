@@ -76,6 +76,7 @@ class Services(db.Model):
     avatar = db.Column(db.String(250), unique=False, nullable=False)
     user_handle = db.Column(db.String(50), unique=False, nullable=False)
     profession = db.Column(db.String(250), unique=False, nullable=False)
+    email = db.Column(db.String(250), unique=False, nullable=False)
 
     def serialize(self):
         return{
@@ -92,7 +93,8 @@ class Services(db.Model):
         "pictures": self.pictures,
         "avatar": self.avatar,
         "user_handle": self.user_handle,
-        "profession" : self.profession
+        "profession" : self.profession,
+        "email" : self.email
         }
     
 class Requests(db.Model):
@@ -111,6 +113,7 @@ class Requests(db.Model):
     avatar = db.Column(db.String(250), unique=False, nullable=False)
     user_handle = db.Column(db.String(50), unique=False, nullable=False)
     profession = db.Column(db.String(250), unique=False, nullable=False)
+    email = db.Column(db.String(250), unique=False, nullable=False)
 
     def serialize(self):
         return{
@@ -127,7 +130,8 @@ class Requests(db.Model):
         "pictures": self.pictures,
         "avatar": self.avatar,
         "user_handle": self.user_handle,
-        "profession" : self.profession
+        "profession" : self.profession,
+        "email" : self.email
         }
     
     

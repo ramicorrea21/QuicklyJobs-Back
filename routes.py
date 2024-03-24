@@ -343,7 +343,8 @@ def post_service():
             public_image_id = public_image_id,
             avatar = profile_info.avatar,
             user_handle = user.user_handle,
-            profession = profile_info.profession
+            profession = profile_info.profession,
+            email = user.user_email
         )
 
         db.session.add(new_service)
@@ -391,7 +392,8 @@ def post_request():
             public_image_id = public_image_id,
             avatar = profile_info.avatar,
             user_handle = user.user_handle,
-            profession = profile_info.profession
+            profession = profile_info.profession,
+            email = user.user_email
         )
         
         db.session.add(new_request)
@@ -502,12 +504,12 @@ def send_email_app():
     print(request_data)
     
     # Verifica que todos los campos necesarios estén en el JSON
-    required_fields = ["offer_title", "phone", "email", "subject", "to"]
+    required_fields = ["title", "phone", "email", "subject", "to", "to_name", "my_name"]
     for field in required_fields:
         if field not in request_data or not request_data[field]:
             return jsonify(f"Field {field} is missing or empty"), 400
     
-    title = request_data["offer_title"]
+    title = request_data["title"]
     phone = request_data["phone"]
     email = request_data["email"]
     subject = request_data["subject"]
