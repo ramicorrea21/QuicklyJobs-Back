@@ -43,6 +43,10 @@ def user_population():
         except Exception as error:
             db.session.rollback()
             return jsonify({"error":f"{error.args}"})
+        
+@app.route('/', methods=['GET'])
+def healtcheck():
+    return jsonify({"good":"good"})
 
 @app.route('/profile-population', methods=['GET'])
 def profiles_population():
